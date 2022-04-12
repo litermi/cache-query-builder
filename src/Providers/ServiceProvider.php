@@ -1,6 +1,6 @@
 <?php
 
-namespace Cirelramos\Cache\Providers;
+namespace Litermi\Cache\Providers;
 
 /**
  *

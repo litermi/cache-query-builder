@@ -1,9 +1,9 @@
 <?php
 
-namespace Cirelramos\Cache\Traits;
+namespace Litermi\Cache\Traits;
 
-use Cirelramos\Cache\Repositories\JoinBuilder\CacheBuilder;
-use Cirelramos\Cache\Services\GetParametersOrderService;
+use Litermi\Cache\Repositories\JoinBuilder\CacheBuilder;
+use Litermi\Cache\Services\GetParametersOrderService;
 
 /**
  *

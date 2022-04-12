@@ -1,20 +1,20 @@
 <?php
 
-namespace Cirelramos\Cache\Traits;
+namespace Litermi\Cache\Traits;
 
-use Cirelramos\Cache\Repositories\JoinBuilder\CacheBuilder;
-use Cirelramos\Cache\Services\FirstDataFromCacheOrDatabaseService;
-use Cirelramos\Cache\Services\GenerateNameCacheService;
-use Cirelramos\Cache\Services\GetDataFromCacheOrDatabaseService;
-use Cirelramos\Cache\Services\GetTagCacheService;
-use Cirelramos\Cache\Services\GetTimeFromModelService;
+use Litermi\Cache\Repositories\JoinBuilder\CacheBuilder;
+use Litermi\Cache\Services\FirstDataFromCacheOrDatabaseService;
+use Litermi\Cache\Services\GenerateNameCacheService;
+use Litermi\Cache\Services\GetDataFromCacheOrDatabaseService;
+use Litermi\Cache\Services\GetTagCacheService;
+use Litermi\Cache\Services\GetTimeFromModelService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
 /**
  * Trait CacheQueryTrait
- * @package Cirelramos\Cache\Repositories\UtilsBuilder
+ * @package Litermi\Cache\Repositories\UtilsBuilder
  */
 trait CacheQueryTrait
 {

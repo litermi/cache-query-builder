@@ -1,15 +1,15 @@
 <?php
 
-namespace Cirelramos\Cache\Services;
+namespace Litermi\Cache\Services;
 
-use Cirelramos\Cache\Repositories\JoinBuilder\CacheBuilder;
+use Litermi\Cache\Repositories\JoinBuilder\CacheBuilder;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class GetTagCacheService
- * @package Cirelramos\Cache\Services
+ * @package Litermi\Cache\Services
  */
 class GetTagCacheService
 {

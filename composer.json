@@ -1,5 +1,5 @@
 {
-    "name": "cirelramos/cache-query-builder",
+    "name": "litermi/cache-query-builder",
     "description": "it is a package provider cache from query generate and purge cache when used methods specifics",
     "type": "library",
     "license": "MIT",
@@ -21,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Cirelramos\\Cache\\": "src/"
+            "Litermi\\Cache\\": "src/"
         }
     },
     "extra": {

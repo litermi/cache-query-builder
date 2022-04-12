@@ -1,9 +1,9 @@
 <?php
 
-namespace Cirelramos\Cache\Models;
+namespace Litermi\Cache\Models;
 
-use Cirelramos\Cache\Repositories\JoinBuilder\CacheBuilder;
-use Cirelramos\Cache\Traits\PurgeCacheBeforeActiveRecord;
+use Litermi\Cache\Repositories\JoinBuilder\CacheBuilder;
+use Litermi\Cache\Traits\PurgeCacheBeforeActiveRecord;
 use Illuminate\Database\Eloquent\Model;
 use Kirschbaum\PowerJoins\PowerJoins;
 

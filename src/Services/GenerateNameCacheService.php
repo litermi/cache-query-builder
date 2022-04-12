@@ -1,8 +1,8 @@
 <?php
 
-namespace Cirelramos\Cache\Services;
+namespace Litermi\Cache\Services;
 
-use Cirelramos\Cache\Repositories\JoinBuilder\CacheBuilder;
+use Litermi\Cache\Repositories\JoinBuilder\CacheBuilder;
 
 /**
  *

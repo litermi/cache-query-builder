@@ -1,11 +1,11 @@
 <?php
 
-namespace Cirelramos\Cache\Traits;
+namespace Litermi\Cache\Traits;
 
-use Cirelramos\Cache\Classes\CacheConst;
-use Cirelramos\Cache\Repositories\JoinBuilder\CacheBuilder;
-use Cirelramos\Cache\Services\GenerateNameCacheService;
-use Cirelramos\Cache\Services\GetParametersPaginationService;
+use Litermi\Cache\Classes\CacheConst;
+use Litermi\Cache\Repositories\JoinBuilder\CacheBuilder;
+use Litermi\Cache\Services\GenerateNameCacheService;
+use Litermi\Cache\Services\GetParametersPaginationService;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Cache;
 

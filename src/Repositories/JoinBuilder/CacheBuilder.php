@@ -1,11 +1,11 @@
 <?php
 
-namespace Cirelramos\Cache\Repositories\JoinBuilder;
+namespace Litermi\Cache\Repositories\JoinBuilder;
 
-use Cirelramos\Cache\Traits\CacheOrderQueryTrait;
-use Cirelramos\Cache\Traits\CachePaginateQueryTrait;
-use Cirelramos\Cache\Traits\CacheQueryTrait;
-use Cirelramos\Cache\Traits\PurgeCacheBeforeActiveRecord;
+use Litermi\Cache\Traits\CacheOrderQueryTrait;
+use Litermi\Cache\Traits\CachePaginateQueryTrait;
+use Litermi\Cache\Traits\CacheQueryTrait;
+use Litermi\Cache\Traits\PurgeCacheBeforeActiveRecord;
 use Illuminate\Database\Eloquent\Builder;
 
 /**

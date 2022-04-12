@@ -1,12 +1,12 @@
 <?php
 
-namespace Cirelramos\Cache\Services;
+namespace Litermi\Cache\Services;
 
-use Cirelramos\Cache\Classes\CacheConst;
+use Litermi\Cache\Classes\CacheConst;
 
 /**
  * Class GetParametersPaginationService
- * @package Cirelramos\Cache\Services
+ * @package Litermi\Cache\Services
  */
 class GetParametersPaginationService
 {

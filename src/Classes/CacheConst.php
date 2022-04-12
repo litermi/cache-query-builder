@@ -2,7 +2,7 @@
 
 /** @noinspection PhpMissingDocCommentInspection */
 
-namespace Cirelramos\Cache\Classes;
+namespace Litermi\Cache\Classes;
 
 class CacheConst
 {

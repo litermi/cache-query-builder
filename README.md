@@ -18,9 +18,9 @@ The `cache-query-builder` package allows you to increase the performance and low
 
 ## Installation
 
-Require the `cirelramos/cache-query-builder` package in your `composer.json` and update your dependencies:
+Require the `litermi/cache-query-builder` package in your `composer.json` and update your dependencies:
 ```sh
-composer require cirelramos/cache-query-builder
+composer require litermi/cache-query-builder
 ```
 
 
@@ -31,17 +31,17 @@ set provider
 ```php
 'providers' => [
     // ...
-    Cirelramos\Cache\Providers\ServiceProvider::class,
+    Litermi\Cache\Providers\ServiceProvider::class,
 ],
 ```
 
 
 The defaults are set in `config/cache-query.php`. Publish the config to copy the file to your own config:
 ```sh
-php artisan vendor:publish --provider="Cirelramos\Cache\Providers\ServiceProvider"
+php artisan vendor:publish --provider="Litermi\Cache\Providers\ServiceProvider"
 ```
 
-> **Note:** this is necessary to yo can change default config
+> **Note:** this is necessary to you can change default config
 
 
 

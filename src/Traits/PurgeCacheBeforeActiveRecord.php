@@ -1,8 +1,8 @@
 <?php
 
-namespace Cirelramos\Cache\Traits;
+namespace Litermi\Cache\Traits;
 
-use Cirelramos\Cache\Services\GetTagCacheService;
+use Litermi\Cache\Services\GetTagCacheService;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;

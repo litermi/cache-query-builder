@@ -1,6 +1,6 @@
 <?php
 
-namespace Cirelramos\Cache\Services;
+namespace Litermi\Cache\Services;
 
 use Exception;
 use Illuminate\Support\Facades\Cache;

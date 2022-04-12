@@ -1,12 +1,12 @@
 <?php
 
-namespace Cirelramos\Cache\Repositories\JoinBuilder;
+namespace Litermi\Cache\Repositories\JoinBuilder;
 
 use Spatie\QueryBuilder\QueryBuilder;
 
 /**
  * Class JoinBuilder
- * @package Cirelramos\Cache\Repositories\JoinBuilder
+ * @package Litermi\Cache\Repositories\JoinBuilder
  */
 class JoinBuilder extends QueryBuilder
 {
