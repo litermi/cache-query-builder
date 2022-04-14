@@ -29,7 +29,7 @@
         },
         "laravel": {
             "providers": [
-                "Cache\\Providers\\ServiceProvider"
+                "Litermi\\Cache\\Providers\\ServiceProvider"
             ]
         }
     },
