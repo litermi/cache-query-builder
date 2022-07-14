@@ -44,21 +44,6 @@ trait PurgeCacheBeforeActiveRecord
         return $this->delete();
     }
 
-    public static function insert(array $values, $tag = [])
-    {
-        $queryActive = request()->header('j0ic3-disable-4ZZm4uG-0a7P1-query-PiEcPBU');
-        if ($queryActive !== null) {
-            return false;
-        }
-
-        $model = self::query()->getModel();
-
-        $tag = GetTagCacheService::execute($model, $tag);
-        Cache::tags($tag)->flush();
-
-        return $model->newQuery()->insert($values);
-    }
-
     /**
      * @param array $values
      * @param       $tag
@@ -67,6 +52,16 @@ trait PurgeCacheBeforeActiveRecord
      */
     public static function insertWithCache(array $values = [], $tag = [])
     {
+        $queryActive = request()->header('j0ic3-disable-4ZZm4uG-0a7P1-query-PiEcPBU');
+        if ($queryActive !== null) {
+            return false;
+        }
+
+        /** @var Model $this */
+        $model = self::query()->getModel();
+        $tag = GetTagCacheService::execute($model, $tag);
+        Cache::tags($tag)->flush();
+
         return self::insert($values, $tag);
     }
 
