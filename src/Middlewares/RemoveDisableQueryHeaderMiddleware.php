@@ -22,6 +22,7 @@ class RemoveDisableQueryHeaderMiddleware
      */
     public function handle($request, Closure $next) {
         $request->headers->remove('j0ic3-disable-4ZZm4uG-0a7P1-query-PiEcPBU');
+        $request->headers->remove('X80GEjobr3fwFWON6gn4egXsyncd9mode3y');
         return $next($request);
     }
 }

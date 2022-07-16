@@ -14,7 +14,7 @@ class CustomCommand extends Command
      * @param $job
      * @return void
      */
-    public function dispatchJob($job): void
+    public function dispatchJob($job, $queue): void
     {
         $typeJob = $this->argument('type_job');
 
@@ -22,9 +22,10 @@ class CustomCommand extends Command
         switch ($typeJob) {
             case 'sync':
                 dispatch_sync($job);
+                request()->headers->set('X80GEjobr3fwFWON6gn4egXsyncd9mode3y', 'sync');
                 break;
             default:
-                dispatch($job)->onQueue(config('queue-names.general'));
+                dispatch($job)->onQueue($queue);
         }
 
 
