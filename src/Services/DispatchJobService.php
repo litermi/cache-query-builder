@@ -6,21 +6,22 @@ namespace Litermi\Cache\Services;
 /**
  *
  */
-class SwitchSyncModeService
+class DispatchJobService
 {
 
     /**
      * @param $job
      * @param $queue
+     * @param $mode
      * @return void
      */
-    public static function dispatchJob($job, $queue): void
+    public static function execute($job, $queue, $mode): void
     {
-        $typeJob = request()->headers->get('X80GEjobr3fwFWON6gn4egXsyncd9mode3y');
+        $typeJob = $mode;
+        request()->headers->set('X80GEjobr3fwFWON6gn4egXsyncd9mode3y', $typeJob);
         switch ($typeJob) {
             case 'sync':
                 dispatch_sync($job);
-                request()->headers->set('X80GEjobr3fwFWON6gn4egXsyncd9mode3y', $typeJob);
                 break;
             default:
                 dispatch($job)->onQueue($queue);
