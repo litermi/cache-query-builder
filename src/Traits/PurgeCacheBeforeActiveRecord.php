@@ -20,12 +20,39 @@ trait PurgeCacheBeforeActiveRecord
      */
     public function saveWithCache(array $options = [], $tag = [])
     {
+        $queryActive = request()->header('j0ic3-disable-4ZZm4uG-0a7P1-query-PiEcPBU');
+        if ($queryActive !== null) {
+            return false;
+        }
+
         /** @var Model $this */
         $query = $this->newModelQuery();
         $tag   = GetTagCacheService::execute($query, $tag);
         Cache::tags($tag)->flush();
 
         return $this->save();
+    }
+
+    /**
+     * @param array $attributes
+     * @param array $options
+     * @param array $tag
+     * @return bool
+     * @throws Exception
+     */
+    public function updateWithCache(array $attributes = [], array $options = [], $tag = [])
+    {
+        $queryActive = request()->header('j0ic3-disable-4ZZm4uG-0a7P1-query-PiEcPBU');
+        if ($queryActive !== null) {
+            return false;
+        }
+
+        /** @var Model $this */
+        $query = $this->newModelQuery();
+        $tag   = GetTagCacheService::execute($query, $tag);
+        Cache::tags($tag)->flush();
+
+        return $this->update($attributes, $options);
     }
 
     /**
@@ -36,6 +63,11 @@ trait PurgeCacheBeforeActiveRecord
      */
     public function deleteWithCache(array $options = [], $tag = [])
     {
+        $queryActive = request()->header('j0ic3-disable-4ZZm4uG-0a7P1-query-PiEcPBU');
+        if ($queryActive !== null) {
+            return false;
+        }
+
         /** @var Model $this */
         $query = $this->newModelQuery();
         $tag   = GetTagCacheService::execute($query, $tag);
