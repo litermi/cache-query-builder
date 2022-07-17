@@ -7,6 +7,7 @@ use Litermi\Cache\Services\GetTagCacheService;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Litermi\Logs\Services\QueryLogService;
 
 /**
  *
@@ -23,6 +24,7 @@ trait PurgeCacheBeforeActiveRecordTrait
     {
         $queryActive = request()->header(ModelCacheConst::HEADER_ACTIVE_RECORD);
         if ($queryActive !== null) {
+            QueryLogService::execute($this);
             return false;
         }
 
@@ -45,6 +47,7 @@ trait PurgeCacheBeforeActiveRecordTrait
     {
         $queryActive = request()->header(ModelCacheConst::HEADER_ACTIVE_RECORD);
         if ($queryActive !== null) {
+            QueryLogService::execute($this);
             return false;
         }
 
@@ -66,6 +69,7 @@ trait PurgeCacheBeforeActiveRecordTrait
     {
         $queryActive = request()->header(ModelCacheConst::HEADER_ACTIVE_RECORD);
         if ($queryActive !== null) {
+            QueryLogService::execute($this);
             return false;
         }
 
@@ -81,6 +85,7 @@ trait PurgeCacheBeforeActiveRecordTrait
     {
         $queryActive = request()->header(ModelCacheConst::HEADER_ACTIVE_RECORD);
         if ($queryActive !== null) {
+            QueryLogService::execute($this);
             return false;
         }
 
@@ -100,6 +105,7 @@ trait PurgeCacheBeforeActiveRecordTrait
      */
     public static function insertWithCache(array $values = [], $tag = [])
     {
+        QueryLogService::execute(self::query());
         $queryActive = request()->header(ModelCacheConst::HEADER_ACTIVE_RECORD);
         if ($queryActive !== null) {
             return false;

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9c1b72546f9514b456bb048235a456db",
+    "content-hash": "e4dfc6f130604cf5a30a7b64300fbd40",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -377,12 +377,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/console.git",
-                "reference": "8207a0fef9dd7b3a5759b72cd5272761ffe57ee8"
+                "reference": "95788c26750677e18726036999a066a213cf0a70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/console/zipball/8207a0fef9dd7b3a5759b72cd5272761ffe57ee8",
-                "reference": "8207a0fef9dd7b3a5759b72cd5272761ffe57ee8",
+                "url": "https://api.github.com/repos/illuminate/console/zipball/95788c26750677e18726036999a066a213cf0a70",
+                "reference": "95788c26750677e18726036999a066a213cf0a70",
                 "shasum": ""
             },
             "require": {
@@ -431,7 +431,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-07-14T15:37:30+00:00"
+            "time": "2022-07-16T19:38:10+00:00"
         },
         {
             "name": "illuminate/container",
@@ -1110,6 +1110,67 @@
                 "source": "https://github.com/kirschbaum-development/eloquent-power-joins/tree/2.6.4"
             },
             "time": "2022-04-06T22:58:03+00:00"
+        },
+        {
+            "name": "litermi/logs",
+            "version": "1.0.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/litermi/log.git",
+                "reference": "ae0bad89165a0936bdcf8e2722d1c38d4183e5d1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/litermi/log/zipball/ae0bad89165a0936bdcf8e2722d1c38d4183e5d1",
+                "reference": "ae0bad89165a0936bdcf8e2722d1c38d4183e5d1",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "^7.20|^8.19|^9.0",
+                "illuminate/contracts": "^7.20|^8.19|^9.0",
+                "illuminate/database": "^7.20|^8.19|^9.0",
+                "illuminate/http": "^7.20|^8.19|^9.0",
+                "php": "^7.4|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Litermi\\Logs\\Providers\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "LogConsole": "Litermi\\Logs\\Facades\\LogConsoleFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Litermi\\Logs\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cirel Ramos",
+                    "email": "cirelramos@gmail.com"
+                }
+            ],
+            "description": "package to log routines and sql query",
+            "keywords": [
+                "database",
+                "laravel",
+                "log"
+            ],
+            "support": {
+                "source": "https://github.com/litermi/log/tree/1.0.13"
+            },
+            "time": "2022-07-17T21:41:47+00:00"
         },
         {
             "name": "nesbot/carbon",
