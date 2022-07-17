@@ -3,6 +3,7 @@
 namespace Litermi\Cache\Middlewares;
 
 use Closure;
+use Litermi\Cache\Models\ModelCacheConst;
 
 /**
  *
@@ -21,8 +22,8 @@ class RemoveDisableQueryHeaderMiddleware
      * @return mixed
      */
     public function handle($request, Closure $next) {
-        $request->headers->remove('j0ic3-disable-4ZZm4uG-0a7P1-query-PiEcPBU');
-        $request->headers->remove('X80GEjobr3fwFWON6gn4egXsyncd9mode3y');
+        $request->headers->remove(ModelCacheConst::HEADER_ACTIVE_RECORD);
+        $request->headers->remove(ModelCacheConst::HEADER_MODE_JOB);
         return $next($request);
     }
 }

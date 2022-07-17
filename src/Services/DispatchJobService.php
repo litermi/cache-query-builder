@@ -3,6 +3,8 @@
 namespace Litermi\Cache\Services;
 
 
+use Litermi\Cache\Models\ModelCacheConst;
+
 /**
  *
  */
@@ -17,7 +19,7 @@ class DispatchJobService
      */
     public static function execute($job, $queue): void
     {
-        $typeJob = request()->header('X80GEjobr3fwFWON6gn4egXsyncd9mode3y');
+        $typeJob = request()->header(ModelCacheConst::HEADER_MODE_JOB);
         switch ($typeJob) {
             case 'sync':
                 dispatch_sync($job);

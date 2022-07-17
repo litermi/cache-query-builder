@@ -3,6 +3,8 @@
 namespace Litermi\Cache\Services;
 
 
+use Litermi\Cache\Models\ModelCacheConst;
+
 /**
  *
  */
@@ -11,10 +13,10 @@ class SetHeaderSwitchActiveRecordAndModeJobService
 
     public static function execute($disableQuery, $typeJob): void
     {
-        if (empty($disableQuery) === false && $disableQuery !== 'record_active') {
-            request()->headers->set('j0ic3-disable-4ZZm4uG-0a7P1-query-PiEcPBU', "disable-query");
+        if (empty($disableQuery) === false && $disableQuery !== ModelCacheConst::ENABLE_ACTIVE_RECORD) {
+            request()->headers->set(ModelCacheConst::HEADER_ACTIVE_RECORD, ModelCacheConst::DISABLE_ACTIVE_RECORD);
         }
 
-        request()->headers->set('X80GEjobr3fwFWON6gn4egXsyncd9mode3y', $typeJob);
+        request()->headers->set(ModelCacheConst::HEADER_MODE_JOB, $typeJob);
     }
 }

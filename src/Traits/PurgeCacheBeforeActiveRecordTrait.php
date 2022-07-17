@@ -2,6 +2,7 @@
 
 namespace Litermi\Cache\Traits;
 
+use Litermi\Cache\Models\ModelCacheConst;
 use Litermi\Cache\Services\GetTagCacheService;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
@@ -20,7 +21,7 @@ trait PurgeCacheBeforeActiveRecordTrait
      */
     public function saveWithCache(array $options = [], $tag = [])
     {
-        $queryActive = request()->header('j0ic3-disable-4ZZm4uG-0a7P1-query-PiEcPBU');
+        $queryActive = request()->header(ModelCacheConst::HEADER_ACTIVE_RECORD);
         if ($queryActive !== null) {
             return false;
         }
@@ -42,7 +43,7 @@ trait PurgeCacheBeforeActiveRecordTrait
      */
     public function updateWithCache(array $attributes = [], array $options = [], $tag = [])
     {
-        $queryActive = request()->header('j0ic3-disable-4ZZm4uG-0a7P1-query-PiEcPBU');
+        $queryActive = request()->header(ModelCacheConst::HEADER_ACTIVE_RECORD);
         if ($queryActive !== null) {
             return false;
         }
@@ -63,7 +64,7 @@ trait PurgeCacheBeforeActiveRecordTrait
      */
     public function deleteWithCache(array $options = [], $tag = [])
     {
-        $queryActive = request()->header('j0ic3-disable-4ZZm4uG-0a7P1-query-PiEcPBU');
+        $queryActive = request()->header(ModelCacheConst::HEADER_ACTIVE_RECORD);
         if ($queryActive !== null) {
             return false;
         }
@@ -84,7 +85,7 @@ trait PurgeCacheBeforeActiveRecordTrait
      */
     public static function insertWithCache(array $values = [], $tag = [])
     {
-        $queryActive = request()->header('j0ic3-disable-4ZZm4uG-0a7P1-query-PiEcPBU');
+        $queryActive = request()->header(ModelCacheConst::HEADER_ACTIVE_RECORD);
         if ($queryActive !== null) {
             return false;
         }

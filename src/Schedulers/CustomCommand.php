@@ -3,6 +3,7 @@
 namespace Litermi\Cache\Schedulers;
 
 use Illuminate\Console\Command;
+use Litermi\Cache\Models\ModelCacheConst;
 
 /**
  *
@@ -22,7 +23,7 @@ class CustomCommand extends Command
         switch ($typeJob) {
             case 'sync':
                 dispatch_sync($job);
-                request()->headers->set('X80GEjobr3fwFWON6gn4egXsyncd9mode3y', 'sync');
+                request()->headers->set(ModelCacheConst::HEADER_MODE_JOB, 'sync');
                 break;
             default:
                 dispatch($job)->onQueue($queue);
@@ -34,8 +35,8 @@ class CustomCommand extends Command
     public function disableQuery(): void
     {
         $disableQuery = $this->argument('disable_query');
-        if (empty($disableQuery) === false && $disableQuery !== 'record_active') {
-            request()->headers->set('j0ic3-disable-4ZZm4uG-0a7P1-query-PiEcPBU', "disable-query");
+        if (empty($disableQuery) === false && $disableQuery !== ModelCacheConst::ENABLE_ACTIVE_RECORD) {
+            request()->headers->set(ModelCacheConst::HEADER_ACTIVE_RECORD, ModelCacheConst::DISABLE_ACTIVE_RECORD);
         }
     }
 }
