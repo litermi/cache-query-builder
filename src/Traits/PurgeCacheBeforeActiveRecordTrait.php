@@ -77,6 +77,21 @@ trait PurgeCacheBeforeActiveRecordTrait
         return $this->delete();
     }
 
+    public function forceDeleteWithCache($tag = [])
+    {
+        $queryActive = request()->header(ModelCacheConst::HEADER_ACTIVE_RECORD);
+        if ($queryActive !== null) {
+            return false;
+        }
+
+        /** @var Model $this */
+        $query = $this->getModel();
+        $tag   = GetTagCacheService::execute($query, $tag);
+        Cache::tags($tag)->flush();
+
+        return $this->forceDelete();
+    }
+
     /**
      * @param array $values
      * @param       $tag
