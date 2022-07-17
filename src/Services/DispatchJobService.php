@@ -15,10 +15,9 @@ class DispatchJobService
      * @param $mode
      * @return void
      */
-    public static function execute($job, $queue, $mode): void
+    public static function execute($job, $queue): void
     {
-        $typeJob = $mode;
-        request()->headers->set('X80GEjobr3fwFWON6gn4egXsyncd9mode3y', $typeJob);
+        $typeJob = request()->header('X80GEjobr3fwFWON6gn4egXsyncd9mode3y');
         switch ($typeJob) {
             case 'sync':
                 dispatch_sync($job);
