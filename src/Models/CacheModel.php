@@ -4,7 +4,7 @@ namespace Litermi\Cache\Models;
 
 use Litermi\Cache\Repositories\JoinBuilder\CacheBuilder;
 use Litermi\Cache\Traits\DisableActiveRecordsByHeaderTraits;
-use Litermi\Cache\Traits\PurgeCacheBeforeActiveRecord;
+use Litermi\Cache\Traits\PurgeCacheBeforeActiveRecordTrait;
 use Illuminate\Database\Eloquent\Model;
 use Kirschbaum\PowerJoins\PowerJoins;
 
@@ -13,7 +13,7 @@ use Kirschbaum\PowerJoins\PowerJoins;
  */
 class CacheModel extends Model
 {
-    use PurgeCacheBeforeActiveRecord;
+    use PurgeCacheBeforeActiveRecordTrait;
     use DisableActiveRecordsByHeaderTraits;
     use PowerJoins;
 

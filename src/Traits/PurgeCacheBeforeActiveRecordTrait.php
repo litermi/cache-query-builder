@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Cache;
 /**
  *
  */
-trait PurgeCacheBeforeActiveRecord
+trait PurgeCacheBeforeActiveRecordTrait
 {
     /**
      * @param array $options
@@ -48,7 +48,7 @@ trait PurgeCacheBeforeActiveRecord
         }
 
         /** @var Model $this */
-        $query = $this->newModelQuery();
+        $query = $this->getModel();
         $tag   = GetTagCacheService::execute($query, $tag);
         Cache::tags($tag)->flush();
 
