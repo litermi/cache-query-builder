@@ -2,12 +2,10 @@
 
 namespace Litermi\Cache\Traits;
 
-use Litermi\Cache\Models\ModelCacheConst;
 use Litermi\Cache\Services\GetTagCacheService;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
-use Litermi\Logs\Services\QueryLogService;
 
 /**
  *
@@ -22,18 +20,18 @@ trait PurgeCacheBeforeActiveRecordTrait
      */
     public function saveWithCache(array $options = [], $tag = [])
     {
-        $queryActive = request()->header(ModelCacheConst::HEADER_ACTIVE_RECORD);
-        if ($queryActive !== null) {
-            QueryLogService::execute($this);
-            return false;
-        }
-
         /** @var Model $this */
         $query = $this->newModelQuery();
         $tag   = GetTagCacheService::execute($query, $tag);
         Cache::tags($tag)->flush();
 
-        return $this->save();
+        try {
+            return $this->save();
+        } catch (Exception $exception) {
+            if ($exception->getMessage() !== "disable query") {
+                throw new Exception($exception->getMessage(), previous: $exception);
+            }
+        }
     }
 
     /**
@@ -45,18 +43,18 @@ trait PurgeCacheBeforeActiveRecordTrait
      */
     public function updateWithCache(array $attributes = [], array $options = [], $tag = [])
     {
-        $queryActive = request()->header(ModelCacheConst::HEADER_ACTIVE_RECORD);
-        if ($queryActive !== null) {
-            QueryLogService::execute($this);
-            return false;
-        }
-
         /** @var Model $this */
         $query = $this->getModel();
         $tag   = GetTagCacheService::execute($query, $tag);
         Cache::tags($tag)->flush();
 
-        return $this->update($attributes, $options);
+        try {
+            return $this->update($attributes, $options);
+        } catch (Exception $exception) {
+            if ($exception->getMessage() !== "disable query") {
+                throw new Exception($exception->getMessage(), previous: $exception);
+            }
+        }
     }
 
     /**
@@ -65,36 +63,36 @@ trait PurgeCacheBeforeActiveRecordTrait
      * @return bool
      * @throws Exception
      */
-    public function deleteWithCache(array $options = [], $tag = [])
+    public function deleteWithCache($tag = [])
     {
-        $queryActive = request()->header(ModelCacheConst::HEADER_ACTIVE_RECORD);
-        if ($queryActive !== null) {
-            QueryLogService::execute($this);
-            return false;
-        }
-
-        /** @var Model $this */
-        $query = $this->newModelQuery();
-        $tag   = GetTagCacheService::execute($query, $tag);
-        Cache::tags($tag)->flush();
-
-        return $this->delete();
-    }
-
-    public function forceDeleteWithCache($tag = [])
-    {
-        $queryActive = request()->header(ModelCacheConst::HEADER_ACTIVE_RECORD);
-        if ($queryActive !== null) {
-            QueryLogService::execute($this);
-            return false;
-        }
-
         /** @var Model $this */
         $query = $this->getModel();
         $tag   = GetTagCacheService::execute($query, $tag);
         Cache::tags($tag)->flush();
 
-        return $this->forceDelete();
+        try {
+            return $this->delete();
+        } catch (Exception $exception) {
+            if ($exception->getMessage() !== "disable query") {
+                throw new Exception($exception->getMessage(), previous: $exception);
+            }
+        }
+    }
+
+    public function forceDeleteWithCache($tag = [])
+    {
+        /** @var Model $this */
+        $query = $this->getModel();
+        $tag   = GetTagCacheService::execute($query, $tag);
+        Cache::tags($tag)->flush();
+
+        try {
+            return $this->forceDelete();
+        } catch (Exception $exception) {
+            if ($exception->getMessage() !== "disable query") {
+                throw new Exception($exception->getMessage(), previous: $exception);
+            }
+        }
     }
 
     /**
@@ -105,18 +103,18 @@ trait PurgeCacheBeforeActiveRecordTrait
      */
     public static function insertWithCache(array $values = [], $tag = [])
     {
-        QueryLogService::execute(self::query());
-        $queryActive = request()->header(ModelCacheConst::HEADER_ACTIVE_RECORD);
-        if ($queryActive !== null) {
-            return false;
-        }
-
         /** @var Model $this */
         $model = self::query()->getModel();
-        $tag = GetTagCacheService::execute($model, $tag);
+        $tag   = GetTagCacheService::execute($model, $tag);
         Cache::tags($tag)->flush();
 
-        return self::insert($values, $tag);
+        try {
+            return self::insert($values);
+        } catch (Exception $exception) {
+            if ($exception->getMessage() !== "disable query") {
+                throw new Exception($exception->getMessage(), previous: $exception);
+            }
+        }
     }
 
 }
