@@ -19,7 +19,7 @@ class CustomCommand extends Command
     {
         $typeJob = $this->argument('type_job');
 
-        $this->disableQuery();
+        $this->disableActiveRecord();
         switch ($typeJob) {
             case 'sync':
                 dispatch_sync($job);
@@ -32,10 +32,10 @@ class CustomCommand extends Command
 
     }
 
-    public function disableQuery(): void
+    public function disableActiveRecord(): void
     {
-        $disableQuery = $this->argument('disable_query');
-        if (empty($disableQuery) === false && $disableQuery !== ModelCacheConst::ENABLE_ACTIVE_RECORD) {
+        $enableActiveRecord = $this->argument('active_record');
+        if (empty($enableActiveRecord) === false && $enableActiveRecord !== ModelCacheConst::ENABLE_ACTIVE_RECORD) {
             request()->headers->set(ModelCacheConst::HEADER_ACTIVE_RECORD, ModelCacheConst::DISABLE_ACTIVE_RECORD);
         }
     }
