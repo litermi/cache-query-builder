@@ -41,6 +41,29 @@ trait PurgeCacheBeforeActiveRecordTrait
      * @return bool
      * @throws Exception
      */
+    public static function createWithCache(array $attributes = [], array $options = [], $tag = [])
+    {
+        /** @var Model $this */
+        $query = Self::query()->getModel();
+        $tag   = GetTagCacheService::execute($query, $tag);
+        Cache::tags($tag)->flush();
+
+        try {
+            return Self::create($attributes, $options);
+        } catch (Exception $exception) {
+            if ($exception->getMessage() !== "disable query") {
+                throw new Exception($exception->getMessage(), previous: $exception);
+            }
+        }
+    }
+
+    /**
+     * @param array $attributes
+     * @param array $options
+     * @param array $tag
+     * @return bool
+     * @throws Exception
+     */
     public function updateWithCache(array $attributes = [], array $options = [], $tag = [])
     {
         /** @var Model $this */
