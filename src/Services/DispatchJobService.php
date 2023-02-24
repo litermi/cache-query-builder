@@ -22,7 +22,9 @@ class DispatchJobService
         $typeJob = request()->header(ModelCacheConst::HEADER_MODE_JOB);
         switch ($typeJob) {
             case 'sync':
+                request()->headers->set(ModelCacheConst::HEADER_MODE_JOB, 'sync');
                 dispatch_sync($job);
+                request()->headers->set(ModelCacheConst::HEADER_MODE_JOB, 'sync');
                 break;
             default:
                 dispatch($job)->onQueue($queue);

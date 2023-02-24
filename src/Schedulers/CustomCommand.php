@@ -22,6 +22,7 @@ class CustomCommand extends Command
         $this->disableActiveRecord();
         switch ($typeJob) {
             case 'sync':
+                request()->headers->set(ModelCacheConst::HEADER_MODE_JOB, 'sync');
                 dispatch_sync($job);
                 request()->headers->set(ModelCacheConst::HEADER_MODE_JOB, 'sync');
                 break;
