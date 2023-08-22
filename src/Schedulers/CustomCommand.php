@@ -35,6 +35,7 @@ class CustomCommand extends Command
 
     public function disableActiveRecord(): void
     {
+        request()->headers->set(ModelCacheConst::HEADER_ACTIVE_RECORD, null);
         $modeRecord = $this->argument('mode_record');
         if (empty($modeRecord) === false && $modeRecord !== ModelCacheConst::ENABLE_ACTIVE_RECORD) {
             request()->headers->set(ModelCacheConst::HEADER_ACTIVE_RECORD, ModelCacheConst::DISABLE_ACTIVE_RECORD);
