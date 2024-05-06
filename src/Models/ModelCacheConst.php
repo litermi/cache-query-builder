@@ -27,4 +27,5 @@ class ModelCacheConst
      *
      */
     public const ENABLE_ACTIVE_RECORD = 'enable_record';
+
 }
