@@ -11,13 +11,13 @@
     ],
     "require": {
         "php": "^7.4|^8.0",
-        "spatie/laravel-query-builder": "^3.6|^5.0",
+        "spatie/laravel-query-builder": "^3.6|^5.0|^5.8",
         "illuminate/database": "^6.9|^7.0|^8.0|^9.0|^10.0",
         "illuminate/http": "^6.9|^7.0|^8.0|^9.0|^10.0",
         "illuminate/contracts": "^6.9|^7.0|^8.0|^9.0|^10.0",
         "illuminate/config": "^6.9|^7.0|^8.0|^9.0|^10.0",
         "illuminate/console": "^6.9|^7.0|^8.0|^9.0|^10.0",
-        "kirschbaum-development/eloquent-power-joins": "^2.5|^2.6",
+        "kirschbaum-development/eloquent-power-joins": "^2.5|^2.6|^3.5",
         "litermi/logs": "^1.0"
     },
     "autoload": {
