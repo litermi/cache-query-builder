@@ -53,8 +53,8 @@ trait CachePaginateQueryTrait
         /** @var CacheBuilder $this */
         $query     = $this;
         [$perPage, $page] = GetParametersPaginationService::execute( $page, $perPage);
-        $extras=$perPage.'-'.$page;
-        $nameCache = GenerateNameCacheService::execute($query, $columns, $extras);
+        $paginationValues = ['perPage'=> $perPage, 'page'=> $page];
+        $nameCache = GenerateNameCacheService::execute($query, $columns, paginationValues: $paginationValues);
         if ($time === null) {
             $time = config('cache-query.cache_default_time_seconds');
         }

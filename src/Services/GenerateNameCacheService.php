@@ -15,8 +15,19 @@ class GenerateNameCacheService
      * @param              $extras
      * @return string
      */
-    public static function execute($query, $columns, $extras = ''): string
+    public static function execute($query, $columns, $extras = '', $paginationValues = []): string
     {
+        $perPage = null;
+        $page    = null;
+
+        if (empty($paginationValues) == false) {
+            $perPage = array_key_exists('perPage', $paginationValues) == false ? $paginationValues['perPage'] : null;
+            $page    = array_key_exists('page', $paginationValues) == false ? $paginationValues['page'] : null;
+        }
+
+        [$perPage, $page] = GetParametersPaginationService::execute($perPage, $page);
+        $extras .= "_" . $perPage . '-' . $page;
+
         $querySql = $query->toSql();
         if (is_array($columns)) {
             $columns = array_values($columns);
