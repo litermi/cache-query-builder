@@ -9,6 +9,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Str;
 use Litermi\Cache\Classes\CacheConst;
 use Litermi\ErrorNotification\Services\CatchNotificationService;
 use Litermi\Logs\Facades\LogConsoleFacade;
@@ -330,7 +331,7 @@ trait CacheRedisTraits
     private function generateKeyCacheAuth( $key, $idUser = '', $idSystem = '' ): string
     {
 
-        return str_slug( $key . '-' .$idUser . ' - ' . $idSystem, '_' );
+        return Str::slug( $key . '-' .$idUser . ' - ' . $idSystem, '_' );
     }
 
     /**
