@@ -24,6 +24,7 @@ trait CacheRedisTraits
 {
 
     Use ResponseTrait;
+    use TextUtilsTraits;
 
     /**
      * Extract the key saved in redis

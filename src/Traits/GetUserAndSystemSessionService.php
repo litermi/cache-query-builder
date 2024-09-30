@@ -2,7 +2,6 @@
 
 namespace Litermi\Cache\Traits;
 
-use function App\Core\Base\Services\request;
 
 /**
  * Class GetUserAndSystemSessionService
