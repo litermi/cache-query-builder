@@ -3,6 +3,7 @@
 namespace Litermi\Cache\Traits;
 
 use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -12,8 +13,6 @@ use Litermi\Cache\Classes\CacheConst;
 use Litermi\ErrorNotification\Services\CatchNotificationService;
 use Litermi\Logs\Facades\LogConsoleFacade;
 use Litermi\Response\Traits\ResponseTrait;
-use Psr\SimpleCache\InvalidArgumentException;
-use function App\Core\Base\Traits\str_slug;
 
 /**
  * Trait CacheRedisTraits
@@ -29,12 +28,12 @@ trait CacheRedisTraits
     /**
      * Extract the key saved in redis
      *
-     * @param string $key      name of the key
-     * @param string $idUser   id of user
+     * @param string $key name of the key
+     * @param string $idUser id of user
      * @param        $idSystem
      * @param string $database name of the database redis
      * @return mixed
-     * @throws InvalidArgumentException
+     * @throws GuzzleException
      */
     protected function getCache( $key, $idUser = '', $idSystem = '', $database = '' )
     {
@@ -91,7 +90,6 @@ trait CacheRedisTraits
      * @param        $idSystem
      * @param string $database name of the database redis
      * @return bool
-     * @throws InvalidArgumentException
      */
     protected function hasCache( $key, $idUser = '', $idSystem = '', $database = '' ): bool
     {
@@ -239,7 +237,6 @@ trait CacheRedisTraits
      * @param       $idSystem
      * @param array $params
      * @return array
-     * @throws InvalidArgumentException
      */
     protected function statusProgressJobs( $identify, $idUser, $idSystem, $params = [] ): array
     {
@@ -378,7 +375,6 @@ trait CacheRedisTraits
     /**
      * @param array $keys
      * @return array
-     * @throws InvalidArgumentException
      */
     protected function getCacheByArrayKeys( array $keys ): array
     {
@@ -433,7 +429,6 @@ trait CacheRedisTraits
      * @param       $model
      * @param array $keys
      * @return mixed
-     * @throws InvalidArgumentException
      */
     protected function getCacheByKeyHandMade( $idUser, $idSystem, $model, $keys = [] )
     {
@@ -577,7 +572,6 @@ trait CacheRedisTraits
     /**
      * @param $customName
      * @return mixed
-     * @throws InvalidArgumentException
      */
     public function getCacheDataJob($customName)
      {
@@ -610,7 +604,6 @@ trait CacheRedisTraits
      * @param $messageProgress
      * @param $errorMessage
      * @return JsonResponse|null
-     * @throws InvalidArgumentException
      */
     public function progressJobs($name, $successMessage, $messageProgress, $errorMessage ): ?JsonResponse
     {
