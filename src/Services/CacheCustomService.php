@@ -52,13 +52,13 @@ class CacheCustomService
         }
     }
 
-    public function put($get, $time)
+    public function put($key, $value, $time)
     {
         if(env('CACHE_DRIVER')!='redis'){
-            Cache::put($get, $time);
+            Cache::put($key, $value, $time);
         }
         if(env('CACHE_DRIVER')=='redis'){
-            Cache::tags($this->tag)->put($get, $time);
+            Cache::tags($this->tag)->put($key, $value, $time);
         }
     }
 
