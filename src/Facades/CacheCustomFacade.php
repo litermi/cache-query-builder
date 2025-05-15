@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Facade;
 use Litermi\Cache\Services\CacheCustomService;
 
 /**
- * @method static CacheCustomService tag()
+ * @method static CacheCustomService tags()
  * @method static CacheCustomService get()
  * @method static CacheCustomService put()
  * @method static CacheCustomService flush()

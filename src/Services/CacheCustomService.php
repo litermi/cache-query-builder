@@ -24,6 +24,10 @@ class CacheCustomService
      * @var
      */
     private $ttl = null;
+    /**
+     * @var mixed
+     */
+    private $database = null;
 
     public function __construct()
     {
@@ -32,7 +36,7 @@ class CacheCustomService
     /**
      * @return $this
      */
-    public function tag($tag): self
+    public function tags($tag): self
     {
         $this->tag = $tag;
         return $this;
@@ -65,6 +69,35 @@ class CacheCustomService
         }
         if(env('CACHE_DRIVER')=='redis'){
             Cache::tags($this->tag)->flush();
+        }
+    }
+
+    public function forget($key)
+    {
+        if(env('CACHE_DRIVER')!='redis') {
+            Cache::get($key);
+        }
+        if(env('CACHE_DRIVER')=='redis') {
+            Cache::tags($this->tag)->forget($key);
+        }
+    }
+
+    public function remember($key)
+    {
+        if(env('CACHE_DRIVER')!='redis') {
+            return Cache::get($key);
+        }
+        if(env('CACHE_DRIVER')=='redis') {
+            return Cache::tags($this->tag)->get($key);
+        }
+    }
+    public function has($key)
+    {
+        if(env('CACHE_DRIVER')!='redis') {
+            return Cache::get($key);
+        }
+        if(env('CACHE_DRIVER')=='redis') {
+            return Cache::tags($this->tag)->get($key);
         }
     }
 }
