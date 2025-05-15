@@ -2,6 +2,7 @@
 
 namespace Litermi\Cache\Services;
 
+use Closure;
 use Illuminate\Support\Facades\Cache;
 
 /**
@@ -82,13 +83,13 @@ class CacheCustomService
         }
     }
 
-    public function remember($key)
+    public function remember($key, $ttl, Closure $callback)
     {
         if(env('CACHE_DRIVER')!='redis') {
-            return Cache::get($key);
+            Cache::remember($key,$ttl,$callback);
         }
         if(env('CACHE_DRIVER')=='redis') {
-            return Cache::tags($this->tag)->get($key);
+            Cache::tags($this->tag)->remember($key,$ttl,$callback);
         }
     }
     public function has($key)
