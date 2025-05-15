@@ -2,6 +2,7 @@
 
 namespace Litermi\Cache\Traits;
 
+use Litermi\Cache\Facades\CacheCustomFacade;
 use Litermi\Cache\Services\GetTagCacheService;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
@@ -23,7 +24,7 @@ trait PurgeCacheBeforeActiveRecordTrait
         /** @var Model $this */
         $query = $this->newModelQuery();
         $tag   = GetTagCacheService::execute($query, $tag);
-        Cache::tags($tag)->flush();
+        CacheCustomFacade::tags($tag)->flush();
 
         try {
             return $this->save();
@@ -46,7 +47,7 @@ trait PurgeCacheBeforeActiveRecordTrait
         /** @var Model $this */
         $query = Self::query()->getModel();
         $tag   = GetTagCacheService::execute($query, $tag);
-        Cache::tags($tag)->flush();
+        CacheCustomFacade::tags($tag)->flush();
 
         try {
             return Self::create($attributes, $options);
@@ -69,7 +70,7 @@ trait PurgeCacheBeforeActiveRecordTrait
         /** @var Model $this */
         $query = $this->getModel();
         $tag   = GetTagCacheService::execute($query, $tag);
-        Cache::tags($tag)->flush();
+        CacheCustomFacade::tags($tag)->flush();
 
         try {
             return $this->update($attributes, $options);
@@ -91,7 +92,7 @@ trait PurgeCacheBeforeActiveRecordTrait
         /** @var Model $this */
         $query = $this->getModel();
         $tag   = GetTagCacheService::execute($query, $tag);
-        Cache::tags($tag)->flush();
+        CacheCustomFacade::tags($tag)->flush();
 
         try {
             return $this->delete();
@@ -107,7 +108,7 @@ trait PurgeCacheBeforeActiveRecordTrait
         /** @var Model $this */
         $query = $this->getModel();
         $tag   = GetTagCacheService::execute($query, $tag);
-        Cache::tags($tag)->flush();
+        CacheCustomFacade::tags($tag)->flush();
 
         try {
             return $this->forceDelete();
@@ -129,7 +130,7 @@ trait PurgeCacheBeforeActiveRecordTrait
         /** @var Model $this */
         $model = self::query()->getModel();
         $tag   = GetTagCacheService::execute($model, $tag);
-        Cache::tags($tag)->flush();
+        CacheCustomFacade::tags($tag)->flush();
 
         try {
             return self::insert($values);

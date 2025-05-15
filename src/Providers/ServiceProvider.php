@@ -2,6 +2,8 @@
 
 namespace Litermi\Cache\Providers;
 
+use Litermi\Cache\Services\CacheCustomService;
+
 /**
  *
  */
@@ -9,6 +11,10 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     public function register()
     {
+        $this->app->bind('cache-custom-service', function()
+        {
+            return new CacheCustomService();
+        });
         $this->mergeConfig();
     }
 

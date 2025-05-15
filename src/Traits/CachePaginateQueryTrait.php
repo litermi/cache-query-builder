@@ -3,6 +3,7 @@
 namespace Litermi\Cache\Traits;
 
 use Litermi\Cache\Classes\CacheConst;
+use Litermi\Cache\Facades\CacheCustomFacade;
 use Litermi\Cache\Repositories\JoinBuilder\CacheBuilder;
 use Litermi\Cache\Services\GenerateNameCacheService;
 use Litermi\Cache\Services\GetParametersPaginationService;
@@ -65,7 +66,7 @@ trait CachePaginateQueryTrait
             return $this->paginateByRequest($columns, $perPage, $pageName, $page);
         }
 
-        return Cache::tags($tag)->remember(
+        return CacheCustomFacade::tags($tag)->remember(
             $nameCache, $time, function () use ($page, $pageName, $columns, $perPage) {
             return $this->paginateByRequest($columns,$perPage,  $pageName, $page);
         }

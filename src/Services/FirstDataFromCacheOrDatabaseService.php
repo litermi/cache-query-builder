@@ -2,6 +2,7 @@
 
 namespace Litermi\Cache\Services;
 
+use Litermi\Cache\Facades\CacheCustomFacade;
 use Litermi\Cache\Repositories\JoinBuilder\CacheBuilder;
 use Illuminate\Support\Facades\Cache;
 
@@ -24,8 +25,7 @@ class FirstDataFromCacheOrDatabaseService
         array $tag
     ): array {
         $dataIsFromCache = true;
-        $dataFromCache   = Cache::tags($tag)
-            ->get($nameCache);
+        $dataFromCache   = CacheCustomFacade::tags($tag)->get($nameCache);
         $headerName = config('cache-query.header_force_not_cache_name');
         $headerName = empty($headerName) ?  'force-not-cache' : $headerName;
         if (request()->header($headerName) != null) {

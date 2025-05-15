@@ -4,6 +4,7 @@ namespace Litermi\Cache\Services;
 
 use Exception;
 use Illuminate\Support\Facades\Cache;
+use Litermi\Cache\Facades\CacheCustomFacade;
 
 /**
  * Class SetCacheService
@@ -23,7 +24,7 @@ class SetCacheService
         $time      = $time === 0 ? config('cache-query.cache_time_seconds') : $time;
         $tag       = GetTagCacheService::execute(null, $tag);
         $customKey = GetKeyCacheBySystemService::execute($customKey, $disabled);
-        Cache::tags($tag)
+        CacheCustomFacade::tags($tag)
             ->put($customKey, $data, $time);
     }
 }

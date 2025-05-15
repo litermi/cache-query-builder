@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Str;
 use Litermi\Cache\Classes\CacheConst;
+use Litermi\Cache\Facades\CacheCustomFacade;
 use Litermi\ErrorNotification\Services\CatchNotificationService;
 use Litermi\Logs\Facades\LogConsoleFacade;
 use Litermi\Response\Traits\ResponseTrait;
@@ -40,7 +41,7 @@ trait CacheRedisTraits
     {
         $keyCustoms = $this->generateKeyCacheAuth($key, $idUser, $idSystem);
 
-        $response = Cache::get($keyCustoms);
+        $response = CacheCustomFacade::get($keyCustoms);
 
         $array                 = [
             'message'          => 'get cache',
@@ -80,7 +81,7 @@ trait CacheRedisTraits
 
         LogConsoleFacade::full()->log('access', $array);
 
-        Cache::put($keyCustoms, $values, $time);
+        CacheCustomFacade::put($keyCustoms, $values, $time);
     }
 
     /**
@@ -97,12 +98,12 @@ trait CacheRedisTraits
 
         $keyCustoms = $this->generateKeyCacheAuth( $key, $idUser, $idSystem );
         if ( !empty( $database ) ) {
-            if ( !empty( Cache::store( $database )->has( $keyCustoms ) ) ) {
+            if ( !empty( CacheCustomFacade::store( $database )->has( $keyCustoms ) ) ) {
                 $status = true;
             } else {
                 $status = false;
             }
-        } elseif ( empty( Cache::has( $keyCustoms ) ) ) {
+        } elseif ( empty( CacheCustomFacade::has( $keyCustoms ) ) ) {
             $status = false;
         } else {
             $status = true;
@@ -126,9 +127,9 @@ trait CacheRedisTraits
         $keyCustoms = $this->generateKeyCacheAuth( $key, $idUser, $idSystem );
 
         if ( !empty( $database ) ) {
-            Cache::store( $database )->forget( $keyCustoms );
+            CacheCustomFacade::store( $database )->forget( $keyCustoms );
         } else {
-            Cache::forget( $keyCustoms );
+            CacheCustomFacade::forget( $keyCustoms );
         }
     }
 

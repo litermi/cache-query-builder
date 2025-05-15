@@ -5,6 +5,7 @@ namespace Litermi\Cache\Services;
 use Exception;
 use Illuminate\Support\Facades\Cache;
 use Litermi\Cache\Classes\CacheConst;
+use Litermi\Cache\Facades\CacheCustomFacade;
 
 /**
  * Class GetCacheService
@@ -28,8 +29,7 @@ class GetCacheService
         if (request()->header($headerName) != null) {
             return null;
         }
-        return Cache::tags($tag)
-            ->get($customKey);
+        return CacheCustomFacade::tags($tag)->get($customKey);
     }
 
     /**

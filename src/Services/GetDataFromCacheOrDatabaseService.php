@@ -2,8 +2,9 @@
 
 namespace Litermi\Cache\Services;
 
-use Litermi\Cache\Repositories\JoinBuilder\CacheBuilder;
 use Illuminate\Support\Facades\Cache;
+use Litermi\Cache\Facades\CacheCustomFacade;
+use Litermi\Cache\Repositories\JoinBuilder\CacheBuilder;
 
 /**
  *
@@ -14,7 +15,7 @@ class GetDataFromCacheOrDatabaseService
      * @param CacheBuilder $query
      * @param              $columns
      * @param              $nameCache
-     * @param array        $tag
+     * @param array $tag
      * @return array
      */
     public static function execute(
@@ -24,21 +25,21 @@ class GetDataFromCacheOrDatabaseService
         array $tag
     ): array {
         $dataIsFromCache = true;
-        $dataFromCache   = Cache::tags($tag)
-            ->get($nameCache);
-        $headerName = config('cache-query.header_force_not_cache_name');
-        $headerName = empty($headerName) ?  'force-not-cache' : $headerName;
+
+        $dataFromCache = CacheCustomFacade::tags($tag)->get($nameCache);
+        $headerName    = config('cache-query.header_force_not_cache_name');
+        $headerName    = empty($headerName) ? 'force-not-cache' : $headerName;
         if (request()->header($headerName) != null) {
             $dataFromCache = null;
         }
 
         if ($dataFromCache !== null) {
-            return [ $dataFromCache, $dataIsFromCache ];
+            return [$dataFromCache, $dataIsFromCache];
         }
 
         $dataIsFromCache  = false;
         $dataFromDatabase = $query->get($columns);
 
-        return [ $dataFromDatabase, $dataIsFromCache ];
+        return [$dataFromDatabase, $dataIsFromCache];
     }
 }

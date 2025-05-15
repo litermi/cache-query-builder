@@ -2,6 +2,7 @@
 
 namespace Litermi\Cache\Traits;
 
+use Litermi\Cache\Facades\CacheCustomFacade;
 use Litermi\Cache\Repositories\JoinBuilder\CacheBuilder;
 use Litermi\Cache\Services\FirstDataFromCacheOrDatabaseService;
 use Litermi\Cache\Services\GenerateNameCacheService;
@@ -89,7 +90,7 @@ trait CacheQueryTrait
             if ($time === null) {
                 $time = GetTimeFromModelService::execute($this);
             }
-            Cache::tags($tag)->put($nameCache, $data, $time);
+            CacheCustomFacade::tags($tag)->put($nameCache, $data, $time);
         }
     }
 
