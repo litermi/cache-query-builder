@@ -60,6 +60,8 @@ class GenerateNameCacheService
 
         $nameCache .= '-' . $extras;
         $nameCache = str_replace($charactersToRemove, '', $nameCache);
+        $nameCache = htmlentities($nameCache, ENT_QUOTES, 'UTF-8');
+        $nameCache = utf8_encode($nameCache);
         $nameCache = md5($nameCache);
 
         return $nameCache;
